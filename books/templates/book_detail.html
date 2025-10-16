@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{ book.title }}</title>
+    <style>
+      body {
+        font-family: Arial;
+        margin: 40px;
+      }
+      .container {
+        max-width: 600px;
+      }
+      .price {
+        color: green;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>{{ book.title }}</h1>
+
+      <p><strong>Description:</strong> {{ book.description }}</p>
+
+      <p>
+        <strong>Author:</strong>
+        <a href="{% url 'author_detail' book.author.id %}">
+          {{ book.author.name }}
+        </a>
+      </p>
+
+      {% if book.published_date %}
+      <p><strong>Published on:</strong> {{ book.published_date }}</p>
+      {% endif %}
+
+      <p class="price"><strong>Price:</strong> ${{ book.price }}</p>
+
+      <p><em>Added to site at:</em> {{ book.added_to_site_at }}</p>
+
+      <p><a href="{% url 'book_list' %}">Back to all books</a></p>
+    </div>
+  </body>
+</html>

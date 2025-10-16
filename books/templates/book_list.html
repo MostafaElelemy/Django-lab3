@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>All Books</title>
+    <style>
+      body {
+        font-family: Arial;
+        margin: 40px;
+      }
+      ul {
+        list-style-type: none;
+        padding: 0;
+      }
+      li {
+        margin-bottom: 15px;
+      }
+      .book-card {
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 10px;
+        width: 350px;
+      }
+      .price {
+        color: green;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>All Books</h1>
+
+    <ul>
+      {% for book in books %}
+      <li>
+        <div class="book-card">
+          <h3>
+            <a href="{% url 'book_detail' book.id %}">{{ book.title }}</a>
+          </h3>
+          <p>
+            <strong>Author:</strong>
+            <a href="{% url 'author_detail' book.author.id %}">
+              {{ book.author.name }}
+            </a>
+          </p>
+          {% if book.published_date %}
+          <p><strong>Published:</strong> {{ book.published_date }}</p>
+          {% endif %}
+          <p class="price">Price: ${{ book.price }}</p>
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{ author.name }}</title>
+    <style>
+      body {
+        font-family: Arial;
+        margin: 40px;
+      }
+      .book-list ul {
+        list-style-type: square;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>{{ author.name }}</h1>
+    <p><strong>Bio:</strong> {{ author.bio }}</p>
+    <p><strong>Books Published:</strong> {{ author.books_published }}</p>
+
+    {% if author.list_of_books %}
+    <p><strong>List of Books (from text field):</strong></p>
+    <pre>{{ author.list_of_books }}</pre>
+    {% endif %}
+
+    <div class="book-list">
+      <h2>Books by {{ author.name }}</h2>
+      {% if author.books.all %}
+      <ul>
+        {% for book in author.books.all %}
+        <li>
+          <a href="{% url 'book_detail' book.id %}">{{ book.title }}</a>
+          — ${{ book.price }}
+        </li>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <p>No books recorded for this author yet.</p>
+      {% endif %}
+    </div>
+
+    <a href="{% url 'book_list' %}">Back to all books</a>
+  </body>
+</html>
